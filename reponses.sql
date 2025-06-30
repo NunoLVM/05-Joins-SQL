@@ -55,17 +55,17 @@ ON s.student_id = e.student_id;
 --🔹 Partie 3 – RIGHT JOIN
 -- 7. Afficher toutes les formations même si aucun étudiant n'y est inscrit.
 
-SELECT course.course_name 
-FROM student 
-RIGHT JOIN course 
-ON student.course_id = course.course_id;
+SELECT c.course_name, s.first_name, s.last_name
+FROM student AS s
+RIGHT JOIN course AS c
+ON s.course_id = c.course_id;
 
 -- 8. Afficher les examens associés à un cours, y compris les cours sans examens (si possible).
 
-SELECT course.course_name AS formation, exam.exam_type AS type_examen 
-FROM exam 
-RIGHT JOIN course 
-ON exam.course_id = course.course_id;
+SELECT c.course_name AS formation, e.exam_type AS type_examen 
+FROM exam AS e
+RIGHT JOIN course  AS c
+ON e.course_id = c.course_id;
 
 
 -- 🔹 Partie 4 – FULL OUTER JOIN
