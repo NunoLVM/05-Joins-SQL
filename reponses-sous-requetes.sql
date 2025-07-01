@@ -19,7 +19,20 @@ FROM Student;
 --### 📌 Q3 – Meilleure note en Développement Web  
 --Afficher les étudiants ayant obtenu **la meilleure note** dans le cours _Développement Web_.
 
-SELECT first_name, last_name, exam
-FROM student
-JOIN exam on student_id
+SELECT s.first_name, s.last_name, e.score
+FROM student AS s
+JOIN Exam AS e ON s.student_id = e.student_id
+WHERE e.course_id = 1 
+    AND e.score = (SELECT MAX(score) FROM Exam 
+    WHERE course_id = 1);
+
+
+SELECT s.first_name, s.last_name, e.score
+FROM student AS s
+JOIN Exam AS e ON s.student_id = e.student_id
+JOIN Course AS c ON s.course_id = c.course_id
+WHERE c.course_name = 'Developpement Web'
+    AND e.score =  (SELECT MAX(score) FROM Exam 
+    JOIN Course ON e.course_id = c.course_id
+    WHERE c.course_name = 'Developpement Web');
 
